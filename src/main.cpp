@@ -1,91 +1,85 @@
-#include <iostream>     // Do obsługi wejścia/wyjścia (cin, cout)
-#include <string>       // Do obsługi std::string
-#include <limits>       // Do walidacji strumieni (cin.ignore)
+#include <iostream>
+#include <string>
+#include <limits>
 
-// -----------------------------------------------------------
-// 1. PLIKI NAGŁÓWKOWE KLAS (NA RAZIE WYKOMENTOWANE)
-// Zostaną odkomentowane, gdy utworzymy te pliki.
-// #include "BSTree.h"
+// 1. AKTUALIZACJA: Dołączamy plik nagłówkowy klasy drzewa
+#include "BSTree.h"
+
+// Plik FileManagera wciąż jest wykomentowany, bo go nie mamy
 // #include "FileManager.h"
-// -----------------------------------------------------------
 
 
 // --- Prototypy funkcji pomocniczych (Interfejs użytkownika) ---
-
-/**
- * @brief Wyświetla główne menu programu.
- */
 void wyswietlMenu();
-
-/**
- * @brief Pobiera od użytkownika liczbę całkowitą z walidacją.
- * @param prompt Tekst zachęty wyświetlany użytkownikowi.
- * @return Poprawnie wczytana liczba całkowita.
- */
 int pobierzLiczbe(const std::string& prompt);
+std::string pobierzNazwePliku(const std::string& prompt);
 
 
-// -----------------------------------------------------------
-// 2. PROTOTYPY FUNKCJI "PLACEHOLDER" (NA RAZIE PUSTE)
-// Te funkcje będą później wywoływać metody z naszych klas.
-// -----------------------------------------------------------
-void op_dodaj();
-void op_usun();
-void op_wyswietl();
-void op_znajdzSciezke();
-void op_wyczysc();
-void op_zapiszTekst();
-void op_wczytajTekst();
-void op_zapiszBin();
-void op_wczytajBin();
+// 2. AKTUALIZACJA: Zmieniamy prototypy, by przyjmowały obiekt drzewa
+// Funkcje "placeholder" dla FileManagera zostają bez zmian
+void op_dodaj(BSTree& drzewo);
+void op_usun(BSTree& drzewo);
+void op_wyswietl(BSTree& drzewo);
+void op_znajdzSciezke(BSTree& drzewo);
+void op_wyczysc(BSTree& drzewo);
+void op_zapiszTekst(BSTree& drzewo);
+
+void op_wczytajTekst(); // Placeholder
+void op_zapiszBin();   // Placeholder
+void op_wczytajBin();  // Placeholder
 
 
 // === GŁÓWNA FUNKCJA PROGRAMU ===
 int main() {
-    // 3. TWORZENIE OBIEKTÓW (NA RAZIE POMINIĘTE)
-    // W tym miejscu później znajdą się:
-    // BSTree mojeDrzewo;
+    
+    // 3. AKTUALIZACJA: Tworzymy obiekt klasy BSTree!
+    BSTree mojeDrzewo;
+
+    // Obiekt FileManager wciąż jest wykomentowany
     // FileManager managerPlikow;
 
-    std::cout << "--- Program Drzewo BST (Wersja: SZKIELET) ---" << std::endl;
+    std::cout << "--- Program Drzewo BST ---" << std::endl;
+    std::cout << "Zintegrowano klase BSTree." << std::endl;
 
-    // 4. Główna pętla programu (menu)
     while (true) {
         wyswietlMenu();
         int wybor = pobierzLiczbe("Wybierz opcję: ");
 
-        // 5. Obsługa wyboru użytkownika (woła puste funkcje)
+        // 4. AKTUALIZACJA: Przekazujemy 'mojeDrzewo' do funkcji
         switch (wybor) {
             case 1:
-                op_dodaj();
+                op_dodaj(mojeDrzewo);
                 break;
             case 2:
-                op_usun();
+                op_usun(mojeDrzewo);
                 break;
             case 3:
-                op_wyswietl();
+                op_wyswietl(mojeDrzewo);
                 break;
             case 4:
-                op_znajdzSciezke();
+                op_znajdzSciezke(mojeDrzewo);
                 break;
             case 5:
-                op_wyczysc();
+                op_wyczysc(mojeDrzewo);
                 break;
             case 6:
-                op_wczytajTekst();
+                // Ta opcja będzie wymagać FileManagera
+                op_wczytajTekst(); 
                 break;
             case 7:
-                op_zapiszTekst();
+                // Ta opcja jest zaimplementowana w BSTree
+                op_zapiszTekst(mojeDrzewo);
                 break;
             case 8:
+                // Ta opcja będzie wymagać FileManagera
                 op_zapiszBin();
                 break;
             case 9:
+                // Ta opcja będzie wymagać FileManagera
                 op_wczytajBin();
                 break;
             case 0:
                 std::cout << "Do widzenia!" << std::endl;
-                // 6. Zakończenie programu
                 return 0;
             default:
                 std::cout << "Niepoprawna opcja. Spróbuj ponownie." << std::endl;
@@ -93,7 +87,6 @@ int main() {
         }
 
         std::cout << "\nNaciśnij Enter, aby kontynuować...";
-        // Czeka na dowolny klawisz, aby użytkownik zdążył przeczytać wynik
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cin.get();
     }
@@ -110,10 +103,10 @@ void wyswietlMenu() {
     std::cout << "4. Znajdź ścieżkę do elementu" << std::endl;
     std::cout << "5. Usuń całe drzewo" << std::endl;
     std::cout << "--- Pliki ---" << std::endl;
-    std::cout << "6. Wczytaj drzewo z pliku tekstowego (liczby)" << std::endl;
+    std::cout << "6. Wczytaj drzewo z pliku tekstowego (liczby) [TODO]" << std::endl;
     std::cout << "7. Zapisz drzewo do pliku tekstowego" << std::endl;
-    std::cout << "8. Zapisz drzewo do pliku binarnego" << std::endl;
-    std::cout << "9. Wczytaj drzewo z pliku binarnego" << std::endl;
+    std::cout << "8. Zapisz drzewo do pliku binarnego [TODO]" << std::endl;
+    std::cout << "9. Wczytaj drzewo z pliku binarnego [TODO]" << std::endl;
     std::cout << "--- Program ---" << std::endl;
     std::cout << "0. Wyjście" << std::endl;
 }
@@ -121,54 +114,87 @@ void wyswietlMenu() {
 int pobierzLiczbe(const std::string& prompt) {
     int wartosc;
     std::cout << prompt;
-    // Pętla walidacji: działa dopóki użytkownik nie poda poprawnej liczby
     while (!(std::cin >> wartosc)) {
         std::cout << "Błąd. To nie jest liczba. Podaj poprawną liczbę: ";
-        // Czyszczenie flag błędu strumienia cin
         std::cin.clear();
-        // Ignorowanie błędnych danych w buforze (aż do znaku nowej linii)
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     }
     return wartosc;
 }
 
-// -----------------------------------------------------------
-// 7. IMPLEMENTACJE FUNKCJI "PLACEHOLDER"
-// Na razie tylko wyświetlają komunikat, że opcja została wybrana.
-// -----------------------------------------------------------
-
-void op_dodaj() {
-    std::cout << "-> Wybrano: Dodaj element (jeszcze nie zaimplementowano)" << std::endl;
+// Ta funkcja będzie potrzebna dla opcji 7
+std::string pobierzNazwePliku(const std::string& prompt) {
+    std::string nazwa;
+    std::cout << prompt;
+    std::cin >> nazwa;
+    return nazwa;
 }
 
-void op_usun() {
-    std::cout << "-> Wybrano: Usuń element (jeszcze nie zaimplementowano)" << std::endl;
+
+// 5. AKTUALIZACJA: Implementacje funkcji wołają metody na obiekcie 'drzewo'
+
+void op_dodaj(BSTree& drzewo) {
+    int wartosc = pobierzLiczbe("Podaj wartość do dodania: ");
+    drzewo.dodaj(wartosc); // WYWOŁANIE METODY KLASY
+    std::cout << "Dodano." << std::endl;
 }
 
-void op_wyswietl() {
-    std::cout << "-> Wybrano: Wyświetl drzewo (jeszcze nie zaimplementowano)" << std::endl;
+void op_usun(BSTree& drzewo) {
+    int wartosc = pobierzLiczbe("Podaj wartość do usunięcia: ");
+    drzewo.usun(wartosc); // WYWOŁANIE METODY KLASY
 }
 
-void op_znajdzSciezke() {
-    std::cout << "-> Wybrano: Znajdź ścieżkę (jeszcze nie zaimplementowano)" << std::endl;
+void op_wyswietl(BSTree& drzewo) {
+    std::cout << "Wybierz metodę wyświetlania:" << std::endl;
+    std::cout << "1. Preorder (Korzeń, Lewy, Prawy)" << std::endl;
+    std::cout << "2. Inorder (Lewy, Korzeń, Prawy - posortowane)" << std::endl;
+    std::cout << "3. Postorder (Lewy, Prawy, Korzeń)" << std::endl;
+    std::cout << "4. Graficznie (struktura)" << std::endl;
+    
+    int wybor = pobierzLiczbe("Wybór: ");
+    switch (wybor) {
+        case 1:
+            drzewo.wyswietl_preorder(); // WYWOŁANIE METODY KLASY
+            break;
+        case 2:
+            drzewo.wyswietl_inorder(); // WYWOŁANIE METODY KLASY
+            break;
+        case 3:
+            drzewo.wyswietl_postorder(); // WYWOŁANIE METODY KLASY
+            break;
+        case 4:
+            drzewo.wyswietlGraficznie(); // WYWOŁANIE METODY KLASY
+            break;
+        default:
+            std::cout << "Nieznana opcja." << std::endl;
+            break;
+    }
 }
 
-void op_wyczysc() {
-    std::cout << "-> Wybrano: Usuń całe drzewo (jeszcze nie zaimplementowano)" << std::endl;
+void op_znajdzSciezke(BSTree& drzewo) {
+    int wartosc = pobierzLiczbe("Podaj wartość do znalezienia: ");
+    drzewo.znajdzSciezke(wartosc); // WYWOŁANIE METODY KLASY
 }
 
+void op_wyczysc(BSTree& drzewo) {
+    drzewo.wyczysc(); // WYWOŁANIE METODY KLASY
+    std::cout << "Drzewo zostało wyczyszczone." << std::endl;
+}
+
+void op_zapiszTekst(BSTree& drzewo) {
+    std::string nazwa = pobierzNazwePliku("Podaj nazwę pliku (np. drzewo.txt): ");
+    drzewo.zapiszDoTekstowego(nazwa); // WYWOŁANIE METODY KLASY
+}
+
+// 6. AKTUALIZACJA: Placeholdery dla FileManagera zostają
 void op_wczytajTekst() {
-    std::cout << "-> Wybrano: Wczytaj z pliku tekstowego (jeszcze nie zaimplementowano)" << std::endl;
-}
-
-void op_zapiszTekst() {
-    std::cout << "-> Wybrano: Zapisz do pliku tekstowego (jeszcze nie zaimplementowano)" << std::endl;
+    std::cout << "-> Wybrano: Wczytaj z pliku tekstowego (Wymaga FileManager)" << std::endl;
 }
 
 void op_zapiszBin() {
-    std::cout << "-> Wybrano: Zapisz do pliku binarnego (jeszcze nie zaimplementowano)" << std::endl;
+    std::cout << "-> Wybrano: Zapisz do pliku binarnego (Wymaga FileManager)" << std::endl;
 }
 
 void op_wczytajBin() {
-    std::cout << "-> Wybrano: Wczytaj z pliku binarnego (jeszcze nie zaimplementowano)" << std::endl;
+    std::cout << "-> Wybrano: Wczytaj z pliku binarnego (Wymaga FileManager)" << std::endl;
 }
