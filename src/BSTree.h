@@ -10,14 +10,15 @@
 // <string> jest potrzebny, bo funkcja zapiszDoTekstowego
 // przyjmuje nazwę pliku jako obiekt std::string.
 #include <string>
+// <iosfwd> legalnie deklaruje w przód typy strumieni (np. std::ostream)
+// bez pełnego dołączania <iostream> w nagłówku.
+#include <iosfwd>
 
 // 3. Wstępna deklaracja (Forward Declaration)
-// Mówimy kompilatorowi, że "kiedyś tam" będzie używany typ std::ostream.
-// Dzięki temu NIE MUSIMY dołączać całego pliku <iostream> tutaj,
-// co przyspiesza kompilację i jest dobrą praktyką.
-namespace std { class ostream; }
+// UWAGA: Nie wolno wprowadzać własnych deklaracji w przestrzeni nazw std.
+// Poprawnym sposobem jest dołączenie <iosfwd>, które deklaruje std::ostream.
 
-
+class FileManager;
 // 4. Deklaracja klasy
 // Słowo kluczowe 'class' rozpoczyna definicję "przepisu" na
 // nasz nowy typ danych, czyli drzewo BST.
@@ -27,6 +28,7 @@ class BSTree {
 // Tutaj znajdują się rzeczy "wewnętrzne", do których użytkownik
 // (np. plik main.cpp) nie powinien mieć bezpośredniego dostępu.
 // To jest zasada hermetyzacji (enkapsulacji).
+friend class FileManager;
 private:
 
     // 6. Wewnętrzna struktura Węzła (Node)
