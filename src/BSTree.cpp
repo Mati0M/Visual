@@ -1,94 +1,122 @@
-// 1. Dołączenia niezbędnych bibliotek
-#include "BSTree.h"     // Nasz plik nagłówkowy - "spis treści" klasy
-#include <iostream>     // Dla operacji wejścia/wyjścia (cout)
-#include <fstream>      // Dla operacji na plikach (ofstream)
-#include <string>       // Dla std::string
+/**
+ * @file BSTree.cpp
+ * @brief Implementacja (definicje metod) klasy BSTree.
+ */
 
-// === KONSTRUKTOR I DESTRUKTOR ===
+#include "BSTree.h"
+#include <iostream>
+#include <fstream>
+#include <string>
 
-// 2. Konstruktor klasy
-// Wywoływany, gdy tworzymy obiekt: BSTree mojeDrzewo;
-// Ustawia korzeń na 'nullptr', bo drzewo jest puste.
+
+/**
+ * @brief Konstruktor domyślny klasy BSTree.
+ * Inicjalizuje drzewo jako puste (korzeń wskazuje na nullptr).
+ */
 BSTree::BSTree() {
     korzen = nullptr;
-    // std::cout << "Drzewo utworzone (puste)." << std::endl; // Można odkomentować do testów
 }
 
-// 3. Destruktor klasy
-// Wywoływany automatycznie, gdy obiekt jest niszczony (np. koniec programu)
-// Musi posprzątać (zwolnić pamięć), inaczej mamy wyciek pamięci!
+/**
+ * @brief Destruktor klasy BSTree.
+ * Automatycznie zwalnia całą pamięć zajmowaną przez węzły drzewa,
+ * wywołując metodę wyczysc().
+ */
 BSTree::~BSTree() {
-    // std::cout << "Niszczenie drzewa..." << std::endl; // Można odkomentować do testów
-    wyczysc(); // Używamy naszej publicznej funkcji do czyszczenia
+    wyczysc();
 }
 
-// === METODY PUBLICZNE (INTERFEJS) ===
-// To są "opakowania" dla metod prywatnych.
-// Są proste i tylko wywołują funkcje pomocnicze,
-// zaczynając od 'korzen'.
 
+/**
+ * @brief Publiczna metoda dodająca nową wartość do drzewa.
+ * Jest "opakowaniem" dla rekurencyjnej funkcji dodajHelper.
+ * @param wartosc Liczba całkowita do wstawienia.
+ */
 void BSTree::dodaj(int wartosc) {
-    // Musimy zaktualizować 'korzen', na wypadek gdyby był 'nullptr'
     korzen = dodajHelper(korzen, wartosc);
 }
 
+/**
+ * @brief Publiczna metoda usuwająca węzeł o podanej wartości z drzewa.
+ * Jest "opakowaniem" dla rekurencyjnej funkcji usunHelper.
+ * @param wartosc Liczba całkowita do usunięcia.
+ */
 void BSTree::usun(int wartosc) {
     korzen = usunHelper(korzen, wartosc);
 }
 
+/**
+ * @brief Publiczna metoda usuwająca wszystkie węzły z drzewa.
+ * Drzewo staje się puste, a korzeń jest ustawiany na nullptr.
+ */
 void BSTree::wyczysc() {
-    wyczyscHelper(korzen); // Wywołaj rekurencyjne czyszczenie
-    korzen = nullptr;      // WAŻNE: Ustaw korzeń na nullptr po wyczyszczeniu
+    wyczyscHelper(korzen);
+    korzen = nullptr;
 }
 
+/**
+ * @brief Publiczna metoda szukająca ścieżki od korzenia do węzła.
+ * Wyświetla ścieżkę w konsoli.
+ * @param wartosc Wartość węzła, do którego szukamy ścieżki.
+ */
 void BSTree::znajdzSciezke(int wartosc) {
     std::cout << "Sciezka do " << wartosc << ": ";
-    // Wywołujemy pomocnika i sprawdzamy, czy coś znalazł
     if (znajdzSciezkeHelper(korzen, wartosc) == false) {
         std::cout << "Nie znaleziono elementu.";
     }
     std::cout << std::endl;
 }
 
+/**
+ * @brief Publiczna metoda zapisująca drzewo do pliku tekstowego.
+ * Używa metody inorder (posortowanej) do zapisu.
+ * @param nazwaPliku Nazwa pliku wyjściowego (np. "drzewo.txt").
+ */
 void BSTree::zapiszDoTekstowego(const std::string& nazwaPliku) {
-    // 4. Otwieranie strumienia pliku
     std::ofstream plikWyjsciowy(nazwaPliku);
 
-    // Sprawdzenie, czy plik otworzył się poprawnie
     if (!plikWyjsciowy.is_open()) {
         std::cout << "Blad: Nie mozna otworzyc pliku do zapisu!" << std::endl;
-        return; // Zakończ funkcję, jeśli się nie udało
+        return;
     }
 
-    // Wywołaj pomocnika, przekazując mu strumień pliku
     zapiszHelper(korzen, plikWyjsciowy);
 
-    // Zamknij plik po zakończeniu zapisu
     plikWyjsciowy.close();
     std::cout << "Zapisano drzewo do pliku: " << nazwaPliku << std::endl;
 }
 
 
-// --- Metody publiczne do wyświetlania ---
-
+/**
+ * @brief Wyświetla drzewo w kolejności Preorder.
+ */
 void BSTree::wyswietl_preorder() {
     std::cout << "Preorder: [ ";
     preorderHelper(korzen);
     std::cout << "]" << std::endl;
 }
 
+/**
+ * @brief Wyświetla drzewo w kolejności Inorder (posortowane).
+ */
 void BSTree::wyswietl_inorder() {
     std::cout << "Inorder: [ ";
     inorderHelper(korzen);
     std::cout << "]" << std::endl;
 }
 
+/**
+ * @brief Wyświetla drzewo w kolejności Postorder.
+ */
 void BSTree::wyswietl_postorder() {
     std::cout << "Postorder: [ ";
     postorderHelper(korzen);
     std::cout << "]" << std::endl;
 }
 
+/**
+ * @brief Wyświetla strukturę drzewa "graficznie" w konsoli (obrócone).
+ */
 void BSTree::wyswietlGraficznie() {
     std::cout << "--- Struktura drzewa (obrocone o 90 stopni) ---" << std::endl;
     wyswietlGraficznieHelper(korzen, "", false);
@@ -96,88 +124,75 @@ void BSTree::wyswietlGraficznie() {
 }
 
 
-// === METODY PRYWATNE (LOGIKA REKURENCYJNA) ===
-// Tu dzieje się cała "magia".
-
-// 5. Prywatny pomocnik: dodaj
-// Używa rekurencji, by znaleźć odpowiednie miejsce (nullptr)
+/**
+ * @brief Prywatna, rekurencyjna funkcja pomocnicza do dodawania węzłów.
+ * @param wezel Aktualny węzeł w rekurencji (zaczyna od korzenia).
+ * @param wartosc Wartość do wstawienia.
+ * @return Wskaźnik na węzeł (zaktualizowany, jeśli był nullptr).
+ */
 BSTree::Wezel* BSTree::dodajHelper(Wezel* wezel, int wartosc) {
-    // 1. Przypadek bazowy: Znaleźliśmy puste miejsce.
-    // Tworzymy nowy węzeł i zwracamy go, aby podłączyć go do rodzica.
     if (wezel == nullptr) {
-        return new Wezel(wartosc); // new Wezel() wywołuje konstruktor struktury Wezel
+        return new Wezel(wartosc);
     }
 
-    // 2. Krok rekurencyjny: Idziemy w dół drzewa
     if (wartosc < wezel->dane) {
-        // Idź w lewo i zaktualizuj wskaźnik lewego dziecka
         wezel->lewy = dodajHelper(wezel->lewy, wartosc);
     } else if (wartosc > wezel->dane) {
-        // Idź w prawo i zaktualizuj wskaźnik prawego dziecka
         wezel->prawy = dodajHelper(wezel->prawy, wartosc);
     }
-    // else (wartosc == wezel->dane) -> Duplikat, nic nie robimy
 
-    // 3. Zwróć (niezmieniony) wskaźnik na węzeł
     return wezel;
 }
 
-// 6. Prywatny pomocnik: usuń
-// Najbardziej skomplikowana funkcja
+/**
+ * @brief Prywatna, rekurencyjna funkcja pomocnicza do usuwania węzłów.
+ * Obsługuje 3 przypadki: liść, węzeł z 1 dzieckiem, węzeł z 2 dzieci.
+ * @param wezel Aktualny węzeł w rekurencji.
+ * @param wartosc Wartość do usunięcia.
+ * @return Wskaźnik na węzeł, który powinien zastąpić 'wezel' (lub sam 'wezel').
+ */
 BSTree::Wezel* BSTree::usunHelper(Wezel* wezel, int wartosc) {
-    // 1. Przypadek bazowy: Nie znaleziono węzła
     if (wezel == nullptr) {
         std::cout << "Nie znaleziono elementu " << wartosc << " do usuniecia." << std::endl;
         return nullptr;
     }
 
-    // 2. Krok rekurencyjny: Szukanie węzła do usunięcia
     if (wartosc < wezel->dane) {
         wezel->lewy = usunHelper(wezel->lewy, wartosc);
     } else if (wartosc > wezel->dane) {
         wezel->prawy = usunHelper(wezel->prawy, wartosc);
     } 
-    // 3. ZNALEZIONO WĘZEŁ (wezel->dane == wartosc)
     else {
-        // PRZYPADEK 1: Węzeł jest liściem (nie ma dzieci)
         if (wezel->lewy == nullptr && wezel->prawy == nullptr) {
-            delete wezel;    // Zwolnij pamięć
-            return nullptr;   // Zwróć nullptr, aby rodzic wiedział, że dziecko zniknęło
+            delete wezel;
+            return nullptr;
         }
-        // PRZYPADEK 2: Węzeł ma JEDNO dziecko (prawe LUB lewe)
-        else if (wezel->lewy == nullptr) { // Ma tylko prawe dziecko
-            Wezel* temp = wezel->prawy; // Zapisz wskaźnik na dziecko
-            delete wezel;              // Usuń węzeł
-            return temp;               // Zwróć dziecko, aby rodzic je "adoptował"
+        else if (wezel->lewy == nullptr) {
+            Wezel* temp = wezel->prawy;
+            delete wezel;
+            return temp;
         }
-        else if (wezel->prawy == nullptr) { // Ma tylko lewe dziecko
+        else if (wezel->prawy == nullptr) {
             Wezel* temp = wezel->lewy;
             delete wezel;
             return temp;
         }
-        // PRZYPADEK 3: Węzeł ma DWOJE dzieci (najtrudniejszy)
         else {
-            // Znajdź "następnika" - czyli najmniejszą wartość
-            // w PRAWYM poddrzewie (tzw. następnik inorder)
             Wezel* nastepnik = znajdzMin(wezel->prawy);
-
-            // Skopiuj dane następnika do obecnego węzła
             wezel->dane = nastepnik->dane;
-
-            // Teraz usuń następnika z prawego poddrzewa
-            // (Następnik na pewno będzie miał co najwyżej jedno prawe dziecko,
-            // więc trafimy w PRZYPADEK 1 lub 2)
             wezel->prawy = usunHelper(wezel->prawy, nastepnik->dane);
         }
     }
-    return wezel; // Zwróć wskaźnik na węzeł (po modyfikacjach)
+    return wezel;
 }
 
-// 7. Prywatny pomocnik: znajdź minimum
-// Potrzebny do usuwania (Przypadek 3)
+/**
+ * @brief Prywatna funkcja pomocnicza znajdująca węzeł o najmniejszej wartości.
+ * Potrzebna do usuwania węzła z dwójką dzieci.
+ * @param wezel Węzeł, od którego zaczynamy szukanie (zazwyczaj korzeń prawego poddrzewa).
+ * @return Wskaźnik na węzeł z najmniejszą wartością.
+ */
 BSTree::Wezel* BSTree::znajdzMin(Wezel* wezel) {
-    // W drzewie BST najmniejsza wartość jest zawsze
-    // idąc maksymalnie w lewo.
     Wezel* obecny = wezel;
     while (obecny != nullptr && obecny->lewy != nullptr) {
         obecny = obecny->lewy;
@@ -185,66 +200,73 @@ BSTree::Wezel* BSTree::znajdzMin(Wezel* wezel) {
     return obecny;
 }
 
-// 8. Prywatny pomocnik: wyczysc
-// Używa rekurencji (Postorder), aby bezpiecznie usunąć węzły
+/**
+ * @brief Prywatna, rekurencyjna funkcja pomocnicza do czyszczenia drzewa.
+ * Używa kolejności Postorder, aby bezpiecznie zwolnić pamięć.
+ * @param wezel Aktualny węzeł w rekurencji.
+ */
 void BSTree::wyczyscHelper(Wezel* wezel) {
-    // Przypadek bazowy
     if (wezel == nullptr) {
         return;
     }
-
-    // Krok rekurencyjny:
-    // 1. Najpierw usuń dzieci
     wyczyscHelper(wezel->lewy);
     wyczyscHelper(wezel->prawy);
-
-    // 2. Na końcu usuń samego siebie
-    // (Gdybyśmy usunęli siebie najpierw, stracilibyśmy wskaźniki do dzieci!)
     delete wezel;
 }
 
 
-// --- Pomocnicy do wyświetlania (rekurencja) ---
-
+/**
+ * @brief Prywatny pomocnik do wyświetlania Preorder (Korzeń, Lewy, Prawy).
+ * @param wezel Aktualny węzeł w rekurencji.
+ */
 void BSTree::preorderHelper(Wezel* wezel) {
     if (wezel == nullptr) return;
-    std::cout << wezel->dane << " "; // Korzeń
-    preorderHelper(wezel->lewy);     // Lewy
-    preorderHelper(wezel->prawy);    // Prawy
+    std::cout << wezel->dane << " ";
+    preorderHelper(wezel->lewy);
+    preorderHelper(wezel->prawy);
 }
 
+/**
+ * @brief Prywatny pomocnik do wyświetlania Inorder (Lewy, Korzeń, Prawy).
+ * @param wezel Aktualny węzeł w rekurencji.
+ */
 void BSTree::inorderHelper(Wezel* wezel) {
     if (wezel == nullptr) return;
-    inorderHelper(wezel->lewy);      // Lewy
-    std::cout << wezel->dane << " "; // Korzeń
-    inorderHelper(wezel->prawy);     // Prawy
+    inorderHelper(wezel->lewy);
+    std::cout << wezel->dane << " ";
+    inorderHelper(wezel->prawy);
 }
 
+/**
+ * @brief Prywatny pomocnik do wyświetlania Postorder (Lewy, Prawy, Korzeń).
+ * @param wezel Aktualny węzeł w rekurencji.
+ */
 void BSTree::postorderHelper(Wezel* wezel) {
     if (wezel == nullptr) return;
-    postorderHelper(wezel->lewy);    // Lewy
-    postorderHelper(wezel->prawy);   // Prawy
-    std::cout << wezel->dane << " "; // Korzeń
+    postorderHelper(wezel->lewy);
+    postorderHelper(wezel->prawy);
+    std::cout << wezel->dane << " ";
 }
 
-// 9. Prywatny pomocnik: szukanie ścieżki
+/**
+ * @brief Prywatny pomocnik do znajdowania i wyświetlania ścieżki.
+ * @param wezel Aktualny węzeł w rekurencji.
+ * @param wartosc Szukana wartość.
+ * @return true jeśli znaleziono, false jeśli nie.
+ */
 bool BSTree::znajdzSciezkeHelper(Wezel* wezel, int wartosc) {
-    // Przypadek bazowy 1: Nie ma takiego węzła
     if (wezel == nullptr) {
         return false;
     }
 
-    // Drukujemy obecny węzeł na ścieżce
     std::cout << wezel->dane;
 
-    // Przypadek bazowy 2: Znaleziono!
     if (wezel->dane == wartosc) {
         std::cout << " (Znaleziono)";
         return true;
     }
 
-    // Krok rekurencyjny: Idziemy w dół
-    std::cout << " -> "; // Strzałka do następnego węzła
+    std::cout << " -> ";
     if (wartosc < wezel->dane) {
         return znajdzSciezkeHelper(wezel->lewy, wartosc);
     } else {
@@ -252,37 +274,42 @@ bool BSTree::znajdzSciezkeHelper(Wezel* wezel, int wartosc) {
     }
 }
 
-// 10. Prywatny pomocnik: zapis do pliku
-// Użyjemy Inorder, aby plik był posortowany (jak w liczby.txt)
+/**
+ * @brief Prywatny pomocnik do zapisu drzewa do strumienia (pliku).
+ * Używa kolejności Inorder.
+ * @param wezel Aktualny węzeł w rekurencji.
+ * @param plik Strumień wyjściowy (std::ostream), do którego zapisujemy dane.
+ */
 void BSTree::zapiszHelper(Wezel* wezel, std::ostream& plik) {
     if (wezel == nullptr) {
         return;
     }
-    
-    zapiszHelper(wezel->lewy, plik);    // Idź w lewo
-    plik << wezel->dane << "\n";      // Zapisz węzeł (każdy w nowej linii)
-    zapiszHelper(wezel->prawy, plik);   // Idź w prawo
+    zapiszHelper(wezel->lewy, plik);
+    plik << wezel->dane << "\n";
+    zapiszHelper(wezel->prawy, plik);
 }
 
-// 11. Prywatny pomocnik: wyświetlanie graficzne
-// To jest rekurencja "Reverse Inorder" (Prawo, Korzeń, Lewo)
+/**
+ * @brief Prywatny pomocnik do "graficznego" wyświetlania struktury.
+ * Używa "odwróconego Inorder" (Reverse Inorder).
+ * @param wezel Aktualny węzeł w rekurencji.
+ * @param wciecie Ciąg znaków (spacje) reprezentujący poziom wcięcia.
+ * @param czyPrawy Flaga informująca, czy węzeł jest prawym dzieckiem.
+ */
 void BSTree::wyswietlGraficznieHelper(Wezel* wezel, std::string wciecie, bool czyPrawy) {
     if (wezel == nullptr) {
         return;
     }
 
-    // 1. Idź maksymalnie w prawo
     wyswietlGraficznieHelper(wezel->prawy, wciecie + "    ", true);
 
-    // 2. Wydrukuj obecny węzeł
     std::cout << wciecie;
     if (czyPrawy) {
-        std::cout << "/---"; // Gałąź idąca w górę (prawe dziecko)
+        std::cout << "/---";
     } else {
-        std::cout << "\\---"; // Gałąź idąca w dół (lewe dziecko lub korzeń)
+        std::cout << "\\---";
     }
     std::cout << wezel->dane << std::endl;
 
-    // 3. Idź w lewo
     wyswietlGraficznieHelper(wezel->lewy, wciecie + "    ", false);
 }
