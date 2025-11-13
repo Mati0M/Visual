@@ -1,17 +1,19 @@
-#include <iostream>     // Do obsługi wejścia/wyjścia (cin, cout)
-#include <string>       // Do obsługi std::string
-#include <limits>       // Do walidacji strumieni (cin.ignore)
+/**
+ * @file main.cpp
+ * @brief Główny plik programu, obsługa menu i integracja klas BSTree i FileManager.
+ */
 
-// 1. Dołączamy OBUDWA pliki nagłówkowe
+#include <iostream>
+#include <string>
+#include <limits>
+
 #include "BSTree.h"
 #include "FileManager.h"
 
-// --- Prototypy funkcji pomocniczych (Interfejs użytkownika) ---
 void wyswietlMenu();
 int pobierzLiczbe(const std::string& prompt);
 std::string pobierzNazwePliku(const std::string& prompt);
 
-// --- Prototypy funkcji-łączników (Wszystkie zaimplementowane) ---
 void op_dodaj(BSTree& drzewo);
 void op_usun(BSTree& drzewo);
 void op_wyswietl(BSTree& drzewo);
@@ -19,18 +21,21 @@ void op_znajdzSciezke(BSTree& drzewo);
 void op_wyczysc(BSTree& drzewo);
 void op_zapiszTekst(BSTree& drzewo);
 
-// Funkcje FileManagera
 void op_wczytajTekst(BSTree& drzewo, FileManager& fm);
 void op_zapiszBin(BSTree& drzewo, FileManager& fm);
 void op_wczytajBin(BSTree& drzewo, FileManager& fm);
 
 
-// === GŁÓWNA FUNKCJA PROGRAMU ===
+/**
+ * @brief Główna funkcja programu i punkt startowy.
+ * * Inicjalizuje obiekty BSTree i FileManager, a następnie uruchamia 
+ * główną pętlę menu, która obsługuje interakcje z użytkownikiem.
+ * * @return 0 po poprawnym zakończeniu programu (wybór opcji '0').
+ */
 int main() {
     
-    // 2. Tworzymy obiekty OBU klas
     BSTree mojeDrzewo;
-    FileManager managerPlikow; // Obiekt do zarządzania plikami
+    FileManager managerPlikow; 
 
     std::cout << "--- Program Drzewo BST ---" << std::endl;
     std::cout << "Gotowy do pracy." << std::endl;
@@ -39,7 +44,6 @@ int main() {
         wyswietlMenu();
         int wybor = pobierzLiczbe("Wybierz opcję: ");
 
-        // 3. Wszystkie opcje menu są w pełni funkcjonalne
         switch (wybor) {
             case 1:
                 op_dodaj(mojeDrzewo);
@@ -56,16 +60,16 @@ int main() {
             case 5:
                 op_wyczysc(mojeDrzewo);
                 break;
-            case 6: // Już nie jest [TODO]
+            case 6: 
                 op_wczytajTekst(mojeDrzewo, managerPlikow); 
                 break;
             case 7:
                 op_zapiszTekst(mojeDrzewo);
                 break;
-            case 8: // Już nie jest [TODO]
+            case 8: 
                 op_zapiszBin(mojeDrzewo, managerPlikow);
                 break;
-            case 9: // Już nie jest [TODO]
+            case 9: 
                 op_wczytajBin(mojeDrzewo, managerPlikow);
                 break;
             case 0:
@@ -82,8 +86,10 @@ int main() {
     }
 }
 
-// === Implementacje funkcji pomocniczych ===
 
+/**
+ * @brief Wyświetla w konsoli wszystkie dostępne opcje menu.
+ */
 void wyswietlMenu() {
     std::cout << "\n=== MENU ===" << std::endl;
     std::cout << "--- Drzewo ---" << std::endl;
@@ -101,6 +107,13 @@ void wyswietlMenu() {
     std::cout << "0. Wyjście" << std::endl;
 }
 
+/**
+ * @brief Bezpiecznie pobiera od użytkownika liczbę całkowitą.
+ * * Posiada walidację (pętlę), która wymusza podanie poprawnej liczby
+ * i ignoruje błędne dane wejściowe (np. tekst).
+ * * @param prompt Tekst zachęty wyświetlany użytkownikowi (np. "Podaj liczbę: ").
+ * @return Poprawnie wczytana liczba całkowita.
+ */
 int pobierzLiczbe(const std::string& prompt) {
     int wartosc;
     std::cout << prompt;
@@ -112,6 +125,11 @@ int pobierzLiczbe(const std::string& prompt) {
     return wartosc;
 }
 
+/**
+ * @brief Pobiera od użytkownika nazwę pliku (jako pojedyncze słowo).
+ * * @param prompt Tekst zachęty (np. "Podaj nazwę pliku: ").
+ * @return Nazwa pliku jako std::string.
+ */
 std::string pobierzNazwePliku(const std::string& prompt) {
     std::string nazwa;
     std::cout << prompt;
@@ -119,18 +137,33 @@ std::string pobierzNazwePliku(const std::string& prompt) {
     return nazwa;
 }
 
-// --- Funkcje operacji (bez zmian) ---
+/**
+ * @brief Obsługuje logikę opcji menu '1. Dodaj element'.
+ * * Prosi użytkownika o wartość i wywołuje metodę `dodaj` na drzewie.
+ * * @param drzewo Referencja do obiektu drzewa, do którego dodajemy.
+ */
 void op_dodaj(BSTree& drzewo) {
     int wartosc = pobierzLiczbe("Podaj wartość do dodania: ");
     drzewo.dodaj(wartosc); 
     std::cout << "Dodano." << std::endl;
 }
 
+/**
+ * @brief Obsługuje logikę opcji menu '2. Usuń element'.
+ * * Prosi użytkownika o wartość i wywołuje metodę `usun` na drzewie.
+ * * @param drzewo Referencja do obiektu drzewa, z którego usuwamy.
+ */
 void op_usun(BSTree& drzewo) {
     int wartosc = pobierzLiczbe("Podaj wartość do usunięcia: ");
     drzewo.usun(wartosc); 
 }
 
+/**
+ * @brief Obsługuje logikę opcji menu '3. Wyświetl drzewo'.
+ * * Wyświetla pod-menu wyboru metody wyświetlania (Preorder, Inorder, itd.)
+ * i wywołuje odpowiednią metodę na obiekcie drzewa.
+ * * @param drzewo Referencja do obiektu drzewa do wyświetlenia.
+ */
 void op_wyswietl(BSTree& drzewo) {
     std::cout << "Wybierz metodę wyświetlania:" << std::endl;
     std::cout << "1. Preorder" << std::endl;
@@ -148,41 +181,66 @@ void op_wyswietl(BSTree& drzewo) {
     }
 }
 
+/**
+ * @brief Obsługuje logikę opcji menu '4. Znajdź ścieżkę do elementu'.
+ * * Prosi o wartość i wywołuje metodę `znajdzSciezke` na drzewie.
+ * * @param drzewo Referencja do obiektu drzewa, w którym szukamy.
+ */
 void op_znajdzSciezke(BSTree& drzewo) {
     int wartosc = pobierzLiczbe("Podaj wartość do znalezienia: ");
     drzewo.znajdzSciezke(wartosc); 
 }
 
+/**
+ * @brief Obsługuje logikę opcji menu '5. Usuń całe drzewo'.
+ * * Wywołuje metodę `wyczysc` na drzewie.
+ * * @param drzewo Referencja do drzewa, które ma być wyczyszczone.
+ */
 void op_wyczysc(BSTree& drzewo) {
     drzewo.wyczysc(); 
     std::cout << "Drzewo zostało wyczyszczone." << std::endl;
 }
 
+/**
+ * @brief Obsługuje logikę opcji menu '7. Zapisz drzewo do pliku tekstowego'.
+ * * Prosi o nazwę pliku i wywołuje metodę `zapiszDoTekstowego` na drzewie.
+ * * @param drzewo Referencja do drzewa, które ma być zapisane.
+ */
 void op_zapiszTekst(BSTree& drzewo) {
     std::string nazwa = pobierzNazwePliku("Podaj nazwę pliku .txt do zapisu: ");
     drzewo.zapiszDoTekstowego(nazwa); 
 }
 
-
-// 4. IMPLEMENTACJA FUNKCJI, KTÓRE BYŁY [TODO]
-// Te funkcje zastąpiły stare "placeholdery"
-
+/**
+ * @brief Obsługuje logikę opcji menu '6. Wczytaj drzewo z pliku tekstowego'.
+ * * Prosi o nazwę pliku i wywołuje metodę `wczytajTekstowyDoDrzewa` na managerze plików.
+ * * @param drzewo Referencja do drzewa, do którego będą dodane elementy.
+ * @param fm Referencja do obiektu FileManager.
+ */
 void op_wczytajTekst(BSTree& drzewo, FileManager& fm) {
     std::string nazwa = pobierzNazwePliku("Podaj nazwę pliku .txt do wczytania: ");
-    // Wywołanie metody z klasy FileManager
     fm.wczytajTekstowyDoDrzewa(drzewo, nazwa); 
 }
 
+/**
+ * @brief Obsługuje logikę opcji menu '8. Zapisz drzewo do pliku binarnego'.
+ * * Prosi o nazwę pliku i wywołuje metodę `zapiszBinarnie` na managerze plików.
+ * * @param drzewo Referencja do drzewa, które ma być zapisane.
+ * @param fm Referencja do obiektu FileManager.
+ */
 void op_zapiszBin(BSTree& drzewo, FileManager& fm) {
     std::string nazwa = pobierzNazwePliku("Podaj nazwę pliku .bin do zapisu: ");
-    // Wywołanie metody z klasy FileManager
     fm.zapiszBinarnie(drzewo, nazwa); 
 }
 
+/**
+ * @brief Obsługuje logikę opcji menu '9. Wczytaj drzewo z pliku binarnego'.
+ * * Prosi o nazwę pliku i wywołuje metodę `wczytajBinarnie`.
+ * Następnie nadpisuje istniejący obiekt drzewa nowym, wczytanym drzewem.
+ * * @param drzewo Referencja do drzewa, które zostanie nadpisane.
+ * @param fm Referencja do obiektu FileManager.
+ */
 void op_wczytajBin(BSTree& drzewo, FileManager& fm) {
     std::string nazwa = pobierzNazwePliku("Podaj nazwę pliku .bin do wczytania: ");
-    
-    // Metoda wczytajBinarnie() ZWRACA nowe drzewo.
-    // Nadpisujemy nasze obecne drzewo tym nowym.
-    drzewo = fm.wczytajBinarnie(nazwa); // Wywołanie metody z klasy FileManager
+    drzewo = fm.wczytajBinarnie(nazwa); 
 }
