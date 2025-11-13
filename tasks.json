@@ -1,0 +1,40 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "C/C++: g++.exe build project",
+      "type": "cppbuild",
+      // Twoja ścieżka do kompilatora jest poprawna
+      "command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
+      "args": [
+        "-fdiagnostics-color=always",
+        "-g",
+
+        // --- KLUCZOWA ZMIANA ---
+        // Zamiast wzorca "*.cpp", podajemy pliki jawnie (osobno).
+        // Zakładam, że Twój folder roboczy (workspaceFolder) to C:\C++
+        // a pliki źródłowe są w C:\C++\src\
+
+        "${workspaceFolder}\\Visual\\src\\main.cpp",
+        "${workspaceFolder}\\Visual\\src\\BSTree.cpp",
+        "${workspaceFolder}\\Visual\\src\\FileManager.cpp",
+
+        // --- Koniec zmiany ---
+
+        "-o",
+        // Wypisujemy plik .exe do głównego folderu
+        "${workspaceFolder}\\Visual\\drzewo_bst.exe"
+      ],
+      "options": {
+        // Folder roboczy (cwd) to główny folder projektu
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": ["$gcc"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Kompiluje cały projekt BST (wszystkie pliki .cpp)"
+    }
+  ]
+}
