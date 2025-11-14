@@ -96,13 +96,13 @@ int main() {
 
 void wyswietlMenu() {
     std::cout << "\n=== MENU ===" << std::endl;
-    std::cout << "--- Drzewo ---" << std::endl;
+    std::cout << "--- drzewo ---" << std::endl;
     std::cout << "1. Dodaj element" << std::endl;
     std::cout << "2. Usuń element" << std::endl;
     std::cout << "3. Wyświetl drzewo (pre/in/post)" << std::endl;
     std::cout << "4. Znajdź ścieżkę do elementu" << std::endl;
     std::cout << "5. Usuń całe drzewo" << std::endl;
-    std::cout << "--- Pliki ---" << std::endl;
+    std::cout << "--- pliki ---" << std::endl;
     std::cout << "6. Wczytaj drzewo z pliku tekstowego (liczby) [TODO]" << std::endl;
     std::cout << "7. Zapisz drzewo do pliku tekstowego" << std::endl;
     std::cout << "8. Zapisz drzewo do pliku binarnego [TODO]" << std::endl;
