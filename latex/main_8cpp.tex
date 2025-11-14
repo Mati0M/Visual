@@ -1,0 +1,290 @@
+\doxysection{main.\+cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{main.cpp@{main.cpp}}
+
+
+Główny plik programu, obsługa menu i integracja klas \doxylink{class_b_s_tree}{BSTree} i \doxylink{class_file_manager}{File\+Manager}.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include "{}BSTree.\+h"{}}\newline
+{\ttfamily \#include "{}File\+Manager.\+h"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{main_8cpp_a74a2482e94f9c33ff0461fc15716c6a9}\label{main_8cpp_a74a2482e94f9c33ff0461fc15716c6a9} 
+void {\bfseries wyswietl\+Menu} ()
+\begin{DoxyCompactList}\small\item\em Wyświetla w konsoli wszystkie dostępne opcje menu. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8cpp_a61df26bc432688fc76f7e1edaf757b17}{pobierz\+Liczbe}} (const std\+::string \&prompt)
+\begin{DoxyCompactList}\small\item\em Bezpiecznie pobiera od użytkownika liczbę całkowitą. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{main_8cpp_ad36980486d04078882acf3ec85db3f4a}{pobierz\+Nazwe\+Pliku}} (const std\+::string \&prompt)
+\begin{DoxyCompactList}\small\item\em Pobiera od użytkownika nazwę pliku (jako pojedyncze słowo). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a01662821402481024a654458e4281800}{op\+\_\+dodaj}} (\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&drzewo)
+\begin{DoxyCompactList}\small\item\em Obsługuje logikę opcji menu \textquotesingle{}1. Dodaj element\textquotesingle{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_aa7825167c7eef681c429cadcd30c02d5}{op\+\_\+usun}} (\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&drzewo)
+\begin{DoxyCompactList}\small\item\em Obsługuje logikę opcji menu \textquotesingle{}2. Usuń element\textquotesingle{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a61ac254c0065107275a16efb189ac931}{op\+\_\+wyswietl}} (\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&drzewo)
+\begin{DoxyCompactList}\small\item\em Obsługuje logikę opcji menu \textquotesingle{}3. Wyświetl drzewo\textquotesingle{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a63cc88a1d6ab5bdd8e21ee238904f012}{op\+\_\+znajdz\+Sciezke}} (\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&drzewo)
+\begin{DoxyCompactList}\small\item\em Obsługuje logikę opcji menu \textquotesingle{}4. Znajdź ścieżkę do elementu\textquotesingle{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_aaea1f6b14e48cad7d230cdca7c60ff0a}{op\+\_\+wyczysc}} (\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&drzewo)
+\begin{DoxyCompactList}\small\item\em Obsługuje logikę opcji menu \textquotesingle{}5. Usuń całe drzewo\textquotesingle{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_ab1c8d38782525e1eeab73e879a0d33ef}{op\+\_\+zapisz\+Tekst}} (\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&drzewo)
+\begin{DoxyCompactList}\small\item\em Obsługuje logikę opcji menu \textquotesingle{}7. Zapisz drzewo do pliku tekstowego\textquotesingle{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a79eb138c1be0afa457ae6d80265c68e6}{op\+\_\+wczytaj\+Tekst}} (\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&drzewo, \mbox{\hyperlink{class_file_manager}{File\+Manager}} \&fm)
+\begin{DoxyCompactList}\small\item\em Obsługuje logikę opcji menu \textquotesingle{}6. Wczytaj drzewo z pliku tekstowego\textquotesingle{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_a10f1e3c6af7f16ce30bf1b93b43d1a1b}{op\+\_\+zapisz\+Bin}} (\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&drzewo, \mbox{\hyperlink{class_file_manager}{File\+Manager}} \&fm)
+\begin{DoxyCompactList}\small\item\em Obsługuje logikę opcji menu \textquotesingle{}8. Zapisz drzewo do pliku binarnego\textquotesingle{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{main_8cpp_aefac780d8d55328215723e62898285d6}{op\+\_\+wczytaj\+Bin}} (\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&drzewo, \mbox{\hyperlink{class_file_manager}{File\+Manager}} \&fm)
+\begin{DoxyCompactList}\small\item\em Obsługuje logikę opcji menu \textquotesingle{}9. Wczytaj drzewo z pliku binarnego\textquotesingle{}. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Główna funkcja programu i punkt startowy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Główny plik programu, obsługa menu i integracja klas \doxylink{class_b_s_tree}{BSTree} i \doxylink{class_file_manager}{File\+Manager}. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{main_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4}\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4} 
+int main (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Główna funkcja programu i punkt startowy. 
+
+
+\begin{DoxyItemize}
+\item Inicjalizuje obiekty \doxylink{class_b_s_tree}{BSTree} i \doxylink{class_file_manager}{File\+Manager}, a następnie uruchamia główną pętlę menu, która obsługuje interakcje z użytkownikiem.
+\item \begin{DoxyReturn}{Returns}
+0 po poprawnym zakończeniu programu (wybór opcji \textquotesingle{}0\textquotesingle{}). 
+\end{DoxyReturn}
+
+\end{DoxyItemize}\Hypertarget{main_8cpp_a01662821402481024a654458e4281800}\index{main.cpp@{main.cpp}!op\_dodaj@{op\_dodaj}}
+\index{op\_dodaj@{op\_dodaj}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{op\_dodaj()}{op\_dodaj()}}
+{\footnotesize\ttfamily \label{main_8cpp_a01662821402481024a654458e4281800} 
+void op\+\_\+dodaj (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&}]{drzewo}{}\end{DoxyParamCaption})}
+
+
+
+Obsługuje logikę opcji menu \textquotesingle{}1. Dodaj element\textquotesingle{}. 
+
+
+\begin{DoxyItemize}
+\item Prosi użytkownika o wartość i wywołuje metodę {\ttfamily dodaj} na drzewie.
+\item 
+\begin{DoxyParams}{Parameters}
+{\em drzewo} & Referencja do obiektu drzewa, do którego dodajemy. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\Hypertarget{main_8cpp_aa7825167c7eef681c429cadcd30c02d5}\index{main.cpp@{main.cpp}!op\_usun@{op\_usun}}
+\index{op\_usun@{op\_usun}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{op\_usun()}{op\_usun()}}
+{\footnotesize\ttfamily \label{main_8cpp_aa7825167c7eef681c429cadcd30c02d5} 
+void op\+\_\+usun (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&}]{drzewo}{}\end{DoxyParamCaption})}
+
+
+
+Obsługuje logikę opcji menu \textquotesingle{}2. Usuń element\textquotesingle{}. 
+
+
+\begin{DoxyItemize}
+\item Prosi użytkownika o wartość i wywołuje metodę {\ttfamily usun} na drzewie.
+\item 
+\begin{DoxyParams}{Parameters}
+{\em drzewo} & Referencja do obiektu drzewa, z którego usuwamy. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\Hypertarget{main_8cpp_aefac780d8d55328215723e62898285d6}\index{main.cpp@{main.cpp}!op\_wczytajBin@{op\_wczytajBin}}
+\index{op\_wczytajBin@{op\_wczytajBin}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{op\_wczytajBin()}{op\_wczytajBin()}}
+{\footnotesize\ttfamily \label{main_8cpp_aefac780d8d55328215723e62898285d6} 
+void op\+\_\+wczytaj\+Bin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&}]{drzewo}{, }\item[{\mbox{\hyperlink{class_file_manager}{File\+Manager}} \&}]{fm}{}\end{DoxyParamCaption})}
+
+
+
+Obsługuje logikę opcji menu \textquotesingle{}9. Wczytaj drzewo z pliku binarnego\textquotesingle{}. 
+
+
+\begin{DoxyItemize}
+\item Prosi o nazwę pliku i wywołuje metodę {\ttfamily wczytaj\+Binarnie}. Następnie nadpisuje istniejący obiekt drzewa nowym, wczytanym drzewem.
+\item 
+\begin{DoxyParams}{Parameters}
+{\em drzewo} & Referencja do drzewa, które zostanie nadpisane. \\
+\hline
+{\em fm} & Referencja do obiektu \doxylink{class_file_manager}{File\+Manager}. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\Hypertarget{main_8cpp_a79eb138c1be0afa457ae6d80265c68e6}\index{main.cpp@{main.cpp}!op\_wczytajTekst@{op\_wczytajTekst}}
+\index{op\_wczytajTekst@{op\_wczytajTekst}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{op\_wczytajTekst()}{op\_wczytajTekst()}}
+{\footnotesize\ttfamily \label{main_8cpp_a79eb138c1be0afa457ae6d80265c68e6} 
+void op\+\_\+wczytaj\+Tekst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&}]{drzewo}{, }\item[{\mbox{\hyperlink{class_file_manager}{File\+Manager}} \&}]{fm}{}\end{DoxyParamCaption})}
+
+
+
+Obsługuje logikę opcji menu \textquotesingle{}6. Wczytaj drzewo z pliku tekstowego\textquotesingle{}. 
+
+
+\begin{DoxyItemize}
+\item Prosi o nazwę pliku i wywołuje metodę {\ttfamily wczytaj\+Tekstowy\+Do\+Drzewa} na managerze plików.
+\item 
+\begin{DoxyParams}{Parameters}
+{\em drzewo} & Referencja do drzewa, do którego będą dodane elementy. \\
+\hline
+{\em fm} & Referencja do obiektu \doxylink{class_file_manager}{File\+Manager}. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\Hypertarget{main_8cpp_aaea1f6b14e48cad7d230cdca7c60ff0a}\index{main.cpp@{main.cpp}!op\_wyczysc@{op\_wyczysc}}
+\index{op\_wyczysc@{op\_wyczysc}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{op\_wyczysc()}{op\_wyczysc()}}
+{\footnotesize\ttfamily \label{main_8cpp_aaea1f6b14e48cad7d230cdca7c60ff0a} 
+void op\+\_\+wyczysc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&}]{drzewo}{}\end{DoxyParamCaption})}
+
+
+
+Obsługuje logikę opcji menu \textquotesingle{}5. Usuń całe drzewo\textquotesingle{}. 
+
+
+\begin{DoxyItemize}
+\item Wywołuje metodę {\ttfamily wyczysc} na drzewie.
+\item 
+\begin{DoxyParams}{Parameters}
+{\em drzewo} & Referencja do drzewa, które ma być wyczyszczone. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\Hypertarget{main_8cpp_a61ac254c0065107275a16efb189ac931}\index{main.cpp@{main.cpp}!op\_wyswietl@{op\_wyswietl}}
+\index{op\_wyswietl@{op\_wyswietl}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{op\_wyswietl()}{op\_wyswietl()}}
+{\footnotesize\ttfamily \label{main_8cpp_a61ac254c0065107275a16efb189ac931} 
+void op\+\_\+wyswietl (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&}]{drzewo}{}\end{DoxyParamCaption})}
+
+
+
+Obsługuje logikę opcji menu \textquotesingle{}3. Wyświetl drzewo\textquotesingle{}. 
+
+
+\begin{DoxyItemize}
+\item Wyświetla pod-\/menu wyboru metody wyświetlania (Preorder, Inorder, itd.) i wywołuje odpowiednią metodę na obiekcie drzewa.
+\item 
+\begin{DoxyParams}{Parameters}
+{\em drzewo} & Referencja do obiektu drzewa do wyświetlenia. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\Hypertarget{main_8cpp_a10f1e3c6af7f16ce30bf1b93b43d1a1b}\index{main.cpp@{main.cpp}!op\_zapiszBin@{op\_zapiszBin}}
+\index{op\_zapiszBin@{op\_zapiszBin}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{op\_zapiszBin()}{op\_zapiszBin()}}
+{\footnotesize\ttfamily \label{main_8cpp_a10f1e3c6af7f16ce30bf1b93b43d1a1b} 
+void op\+\_\+zapisz\+Bin (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&}]{drzewo}{, }\item[{\mbox{\hyperlink{class_file_manager}{File\+Manager}} \&}]{fm}{}\end{DoxyParamCaption})}
+
+
+
+Obsługuje logikę opcji menu \textquotesingle{}8. Zapisz drzewo do pliku binarnego\textquotesingle{}. 
+
+
+\begin{DoxyItemize}
+\item Prosi o nazwę pliku i wywołuje metodę {\ttfamily zapisz\+Binarnie} na managerze plików.
+\item 
+\begin{DoxyParams}{Parameters}
+{\em drzewo} & Referencja do drzewa, które ma być zapisane. \\
+\hline
+{\em fm} & Referencja do obiektu \doxylink{class_file_manager}{File\+Manager}. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\Hypertarget{main_8cpp_ab1c8d38782525e1eeab73e879a0d33ef}\index{main.cpp@{main.cpp}!op\_zapiszTekst@{op\_zapiszTekst}}
+\index{op\_zapiszTekst@{op\_zapiszTekst}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{op\_zapiszTekst()}{op\_zapiszTekst()}}
+{\footnotesize\ttfamily \label{main_8cpp_ab1c8d38782525e1eeab73e879a0d33ef} 
+void op\+\_\+zapisz\+Tekst (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&}]{drzewo}{}\end{DoxyParamCaption})}
+
+
+
+Obsługuje logikę opcji menu \textquotesingle{}7. Zapisz drzewo do pliku tekstowego\textquotesingle{}. 
+
+
+\begin{DoxyItemize}
+\item Prosi o nazwę pliku i wywołuje metodę {\ttfamily zapisz\+Do\+Tekstowego} na drzewie.
+\item 
+\begin{DoxyParams}{Parameters}
+{\em drzewo} & Referencja do drzewa, które ma być zapisane. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\Hypertarget{main_8cpp_a63cc88a1d6ab5bdd8e21ee238904f012}\index{main.cpp@{main.cpp}!op\_znajdzSciezke@{op\_znajdzSciezke}}
+\index{op\_znajdzSciezke@{op\_znajdzSciezke}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{op\_znajdzSciezke()}{op\_znajdzSciezke()}}
+{\footnotesize\ttfamily \label{main_8cpp_a63cc88a1d6ab5bdd8e21ee238904f012} 
+void op\+\_\+znajdz\+Sciezke (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&}]{drzewo}{}\end{DoxyParamCaption})}
+
+
+
+Obsługuje logikę opcji menu \textquotesingle{}4. Znajdź ścieżkę do elementu\textquotesingle{}. 
+
+
+\begin{DoxyItemize}
+\item Prosi o wartość i wywołuje metodę {\ttfamily znajdz\+Sciezke} na drzewie.
+\item 
+\begin{DoxyParams}{Parameters}
+{\em drzewo} & Referencja do obiektu drzewa, w którym szukamy. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\Hypertarget{main_8cpp_a61df26bc432688fc76f7e1edaf757b17}\index{main.cpp@{main.cpp}!pobierzLiczbe@{pobierzLiczbe}}
+\index{pobierzLiczbe@{pobierzLiczbe}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{pobierzLiczbe()}{pobierzLiczbe()}}
+{\footnotesize\ttfamily \label{main_8cpp_a61df26bc432688fc76f7e1edaf757b17} 
+int pobierz\+Liczbe (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{prompt}{}\end{DoxyParamCaption})}
+
+
+
+Bezpiecznie pobiera od użytkownika liczbę całkowitą. 
+
+
+\begin{DoxyItemize}
+\item Posiada walidację (pętlę), która wymusza podanie poprawnej liczby i ignoruje błędne dane wejściowe (np. tekst).
+\item 
+\begin{DoxyParams}{Parameters}
+{\em prompt} & Tekst zachęty wyświetlany użytkownikowi (np. "{}\+Podaj liczbę\+: "{}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Poprawnie wczytana liczba całkowita. 
+\end{DoxyReturn}
+
+\end{DoxyItemize}\Hypertarget{main_8cpp_ad36980486d04078882acf3ec85db3f4a}\index{main.cpp@{main.cpp}!pobierzNazwePliku@{pobierzNazwePliku}}
+\index{pobierzNazwePliku@{pobierzNazwePliku}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{pobierzNazwePliku()}{pobierzNazwePliku()}}
+{\footnotesize\ttfamily \label{main_8cpp_ad36980486d04078882acf3ec85db3f4a} 
+std\+::string pobierz\+Nazwe\+Pliku (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{prompt}{}\end{DoxyParamCaption})}
+
+
+
+Pobiera od użytkownika nazwę pliku (jako pojedyncze słowo). 
+
+
+\begin{DoxyItemize}
+\item 
+\begin{DoxyParams}{Parameters}
+{\em prompt} & Tekst zachęty (np. "{}\+Podaj nazwę pliku\+: "{}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nazwa pliku jako std\+::string. 
+\end{DoxyReturn}
+
+\end{DoxyItemize}

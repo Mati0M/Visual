@@ -1,0 +1,29 @@
+\doxysection{File\+Manager.\+h}
+\hypertarget{_file_manager_8h_source}{}\label{_file_manager_8h_source}\mbox{\hyperlink{_file_manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#ifndef\ FILEMANAGER\_H}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#define\ FILEMANAGER\_H}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_b_s_tree_8h}{BSTree.h}}"{}}\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <iosfwd>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_file_manager}{FileManager}}\ \{}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ zapiszBinarnieHelper(BSTree::Wezel*\ wezel,\ std::ostream\&\ plik);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_manager_a1924f15ac82e6bb10ca037edfe453619}{wczytajTekstowyDoDrzewa}}(\mbox{\hyperlink{class_b_s_tree}{BSTree}}\&\ drzewo,\ \textcolor{keyword}{const}\ std::string\&\ nazwaPliku);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_file_manager_a8f3b3b130aee3131527c7e27647ec4b5}{zapiszBinarnie}}(\mbox{\hyperlink{class_b_s_tree}{BSTree}}\&\ drzewo,\ \textcolor{keyword}{const}\ std::string\&\ nazwaPliku);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{class_b_s_tree}{BSTree}}\ \mbox{\hyperlink{class_file_manager_a594ca8620a1188df93700be725a8e75c}{wczytajBinarnie}}(\textcolor{keyword}{const}\ std::string\&\ nazwaPliku);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ FILEMANAGER\_H}}
+
+\end{DoxyCode}

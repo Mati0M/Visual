@@ -1,0 +1,208 @@
+\doxysection{BSTree Class Reference}
+\hypertarget{class_b_s_tree}{}\label{class_b_s_tree}\index{BSTree@{BSTree}}
+
+
+Klasa implementująca strukturę binarnego drzewa poszukiwań (BST).  
+
+
+
+
+{\ttfamily \#include $<$BSTree.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_b_s_tree_a453f06c8a102516d7306d53c62b6b9bc}{BSTree}} ()
+\begin{DoxyCompactList}\small\item\em Konstruktor domyślny klasy \doxylink{class_b_s_tree}{BSTree}. Tworzy puste drzewo (korzen = nullptr). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_b_s_tree_a61dd6f59635ca4b40ab97c6a0f939bca}{\texorpdfstring{$\sim$}{\string~}\+BSTree}} ()
+\begin{DoxyCompactList}\small\item\em Destruktor klasy \doxylink{class_b_s_tree}{BSTree}. Automatycznie wywołuje metodę \doxylink{class_b_s_tree_a32ab418481ff992e36b0add232b67d93}{wyczysc()} w celu zwolnienia pamięci. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_b_s_tree_a582968c080b63a8dbf30e27d61775628}{dodaj}} (int wartosc)
+\begin{DoxyCompactList}\small\item\em Dodaje nową wartość do drzewa BST. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_b_s_tree_ae9c1de5479a053e120f6595e7263f372}{usun}} (int wartosc)
+\begin{DoxyCompactList}\small\item\em Usuwa węzeł o podanej wartości z drzewa BST. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_b_s_tree_a32ab418481ff992e36b0add232b67d93}{wyczysc}} ()
+\begin{DoxyCompactList}\small\item\em Usuwa wszystkie węzły z drzewa, zwalniając pamięć. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_b_s_tree_a705ec49fa3178acccc616314d55a2ed4}{znajdz\+Sciezke}} (int wartosc)
+\begin{DoxyCompactList}\small\item\em Wyszukuje ścieżkę od korzenia do węzła o podanej wartości. Ścieżka jest drukowana bezpośrednio do konsoli. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_b_s_tree_a224c8caec458949123ff10447d366f11}{zapisz\+Do\+Tekstowego}} (const std\+::string \&nazwa\+Pliku)
+\begin{DoxyCompactList}\small\item\em Zapisuje zawartość drzewa do pliku tekstowego. Wartości są zapisywane w kolejności Inorder (posortowane). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_b_s_tree_a30807e40bbb8acf030cc5c4f6c16ad27}{wyswietl\+\_\+preorder}} ()
+\begin{DoxyCompactList}\small\item\em Wyświetla zawartość drzewa w konsoli w kolejności Preorder. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_b_s_tree_a7997c9bf9ad20436d7f23f4e960c0a73}{wyswietl\+\_\+inorder}} ()
+\begin{DoxyCompactList}\small\item\em Wyświetla zawartość drzewa w konsoli w kolejności Inorder. (Wynik będzie posortowany rosnąco). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_b_s_tree_a280a78c1c948fe8ed18608075f7cab77}{wyswietl\+\_\+postorder}} ()
+\begin{DoxyCompactList}\small\item\em Wyświetla zawartość drzewa w konsoli w kolejności Postorder. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_b_s_tree_adb354499eeb1b2c7ccb6ce5355f42685}{wyswietl\+Graficznie}} ()
+\begin{DoxyCompactList}\small\item\em Wyświetla strukturę drzewa w konsoli w formie "{}graficznej"{}. (Drzewo jest obrócone o 90 stopni). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_b_s_tree_a8480b1a0f54b1d000032cac98fa83b3f}\label{class_b_s_tree_a8480b1a0f54b1d000032cac98fa83b3f} 
+class \mbox{\hyperlink{class_b_s_tree_a8480b1a0f54b1d000032cac98fa83b3f}{File\+Manager}}
+\begin{DoxyCompactList}\small\item\em Deklaracja przyjaźni z klasą \doxylink{class_file_manager}{File\+Manager}. Umożliwia klasie \doxylink{class_file_manager}{File\+Manager} dostęp do prywatnych pól (korzen) i typów (Wezel) tej klasy w celu zapisu binarnego. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Klasa implementująca strukturę binarnego drzewa poszukiwań (BST). 
+
+
+\begin{DoxyItemize}
+\item Zarządza węzłami przechowującymi liczby całkowite, umożliwiając operacje takie jak dodawanie, usuwanie, przeszukiwanie i wyświetlanie. 
+\end{DoxyItemize}
+
+\label{doc-constructors}
+\Hypertarget{class_b_s_tree_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_b_s_tree_a453f06c8a102516d7306d53c62b6b9bc}\index{BSTree@{BSTree}!BSTree@{BSTree}}
+\index{BSTree@{BSTree}!BSTree@{BSTree}}
+\doxysubsubsection{\texorpdfstring{BSTree()}{BSTree()}}
+{\footnotesize\ttfamily \label{class_b_s_tree_a453f06c8a102516d7306d53c62b6b9bc} 
+BSTree\+::\+BSTree (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Konstruktor domyślny klasy \doxylink{class_b_s_tree}{BSTree}. Tworzy puste drzewo (korzen = nullptr). 
+
+Konstruktor domyślny klasy \doxylink{class_b_s_tree}{BSTree}. Inicjalizuje drzewo jako puste (korzeń wskazuje na nullptr). \Hypertarget{class_b_s_tree_a61dd6f59635ca4b40ab97c6a0f939bca}\index{BSTree@{BSTree}!````~BSTree@{\texorpdfstring{$\sim$}{\string~}BSTree}}
+\index{````~BSTree@{\texorpdfstring{$\sim$}{\string~}BSTree}!BSTree@{BSTree}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}BSTree()}{\string~BSTree()}}
+{\footnotesize\ttfamily \label{class_b_s_tree_a61dd6f59635ca4b40ab97c6a0f939bca} 
+BSTree\+::\texorpdfstring{$\sim$}{\string~}\+BSTree (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destruktor klasy \doxylink{class_b_s_tree}{BSTree}. Automatycznie wywołuje metodę \doxylink{class_b_s_tree_a32ab418481ff992e36b0add232b67d93}{wyczysc()} w celu zwolnienia pamięci. 
+
+Destruktor klasy \doxylink{class_b_s_tree}{BSTree}. Automatycznie zwalnia całą pamięć zajmowaną przez węzły drzewa, wywołując metodę \doxylink{class_b_s_tree_a32ab418481ff992e36b0add232b67d93}{wyczysc()}. 
+
+\label{doc-func-members}
+\Hypertarget{class_b_s_tree_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_b_s_tree_a582968c080b63a8dbf30e27d61775628}\index{BSTree@{BSTree}!dodaj@{dodaj}}
+\index{dodaj@{dodaj}!BSTree@{BSTree}}
+\doxysubsubsection{\texorpdfstring{dodaj()}{dodaj()}}
+{\footnotesize\ttfamily \label{class_b_s_tree_a582968c080b63a8dbf30e27d61775628} 
+void BSTree\+::dodaj (\begin{DoxyParamCaption}\item[{int}]{wartosc}{}\end{DoxyParamCaption})}
+
+
+
+Dodaje nową wartość do drzewa BST. 
+
+Publiczna metoda dodająca nową wartość do drzewa. Jest "{}opakowaniem"{} dla rekurencyjnej funkcji dodaj\+Helper.
+
+
+\begin{DoxyParams}{Parameters}
+{\em wartosc} & Liczba całkowita do wstawienia. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_b_s_tree_ae9c1de5479a053e120f6595e7263f372}\index{BSTree@{BSTree}!usun@{usun}}
+\index{usun@{usun}!BSTree@{BSTree}}
+\doxysubsubsection{\texorpdfstring{usun()}{usun()}}
+{\footnotesize\ttfamily \label{class_b_s_tree_ae9c1de5479a053e120f6595e7263f372} 
+void BSTree\+::usun (\begin{DoxyParamCaption}\item[{int}]{wartosc}{}\end{DoxyParamCaption})}
+
+
+
+Usuwa węzeł o podanej wartości z drzewa BST. 
+
+Publiczna metoda usuwająca węzeł o podanej wartości z drzewa. Jest "{}opakowaniem"{} dla rekurencyjnej funkcji usun\+Helper.
+
+
+\begin{DoxyParams}{Parameters}
+{\em wartosc} & Liczba całkowita do usunięcia. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_b_s_tree_a32ab418481ff992e36b0add232b67d93}\index{BSTree@{BSTree}!wyczysc@{wyczysc}}
+\index{wyczysc@{wyczysc}!BSTree@{BSTree}}
+\doxysubsubsection{\texorpdfstring{wyczysc()}{wyczysc()}}
+{\footnotesize\ttfamily \label{class_b_s_tree_a32ab418481ff992e36b0add232b67d93} 
+void BSTree\+::wyczysc (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Usuwa wszystkie węzły z drzewa, zwalniając pamięć. 
+
+Publiczna metoda usuwająca wszystkie węzły z drzewa. Drzewo staje się puste, a korzeń jest ustawiany na nullptr. \Hypertarget{class_b_s_tree_a7997c9bf9ad20436d7f23f4e960c0a73}\index{BSTree@{BSTree}!wyswietl\_inorder@{wyswietl\_inorder}}
+\index{wyswietl\_inorder@{wyswietl\_inorder}!BSTree@{BSTree}}
+\doxysubsubsection{\texorpdfstring{wyswietl\_inorder()}{wyswietl\_inorder()}}
+{\footnotesize\ttfamily \label{class_b_s_tree_a7997c9bf9ad20436d7f23f4e960c0a73} 
+void BSTree\+::wyswietl\+\_\+inorder (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Wyświetla zawartość drzewa w konsoli w kolejności Inorder. (Wynik będzie posortowany rosnąco). 
+
+Wyświetla drzewo w kolejności Inorder (posortowane). \Hypertarget{class_b_s_tree_a280a78c1c948fe8ed18608075f7cab77}\index{BSTree@{BSTree}!wyswietl\_postorder@{wyswietl\_postorder}}
+\index{wyswietl\_postorder@{wyswietl\_postorder}!BSTree@{BSTree}}
+\doxysubsubsection{\texorpdfstring{wyswietl\_postorder()}{wyswietl\_postorder()}}
+{\footnotesize\ttfamily \label{class_b_s_tree_a280a78c1c948fe8ed18608075f7cab77} 
+void BSTree\+::wyswietl\+\_\+postorder (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Wyświetla zawartość drzewa w konsoli w kolejności Postorder. 
+
+Wyświetla drzewo w kolejności Postorder. \Hypertarget{class_b_s_tree_a30807e40bbb8acf030cc5c4f6c16ad27}\index{BSTree@{BSTree}!wyswietl\_preorder@{wyswietl\_preorder}}
+\index{wyswietl\_preorder@{wyswietl\_preorder}!BSTree@{BSTree}}
+\doxysubsubsection{\texorpdfstring{wyswietl\_preorder()}{wyswietl\_preorder()}}
+{\footnotesize\ttfamily \label{class_b_s_tree_a30807e40bbb8acf030cc5c4f6c16ad27} 
+void BSTree\+::wyswietl\+\_\+preorder (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Wyświetla zawartość drzewa w konsoli w kolejności Preorder. 
+
+Wyświetla drzewo w kolejności Preorder. \Hypertarget{class_b_s_tree_adb354499eeb1b2c7ccb6ce5355f42685}\index{BSTree@{BSTree}!wyswietlGraficznie@{wyswietlGraficznie}}
+\index{wyswietlGraficznie@{wyswietlGraficznie}!BSTree@{BSTree}}
+\doxysubsubsection{\texorpdfstring{wyswietlGraficznie()}{wyswietlGraficznie()}}
+{\footnotesize\ttfamily \label{class_b_s_tree_adb354499eeb1b2c7ccb6ce5355f42685} 
+void BSTree\+::wyswietl\+Graficznie (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Wyświetla strukturę drzewa w konsoli w formie "{}graficznej"{}. (Drzewo jest obrócone o 90 stopni). 
+
+Wyświetla strukturę drzewa "{}graficznie"{} w konsoli (obrócone). \Hypertarget{class_b_s_tree_a224c8caec458949123ff10447d366f11}\index{BSTree@{BSTree}!zapiszDoTekstowego@{zapiszDoTekstowego}}
+\index{zapiszDoTekstowego@{zapiszDoTekstowego}!BSTree@{BSTree}}
+\doxysubsubsection{\texorpdfstring{zapiszDoTekstowego()}{zapiszDoTekstowego()}}
+{\footnotesize\ttfamily \label{class_b_s_tree_a224c8caec458949123ff10447d366f11} 
+void BSTree\+::zapisz\+Do\+Tekstowego (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{nazwa\+Pliku}{}\end{DoxyParamCaption})}
+
+
+
+Zapisuje zawartość drzewa do pliku tekstowego. Wartości są zapisywane w kolejności Inorder (posortowane). 
+
+Publiczna metoda zapisująca drzewo do pliku tekstowego. Używa metody inorder (posortowanej) do zapisu.
+
+
+\begin{DoxyParams}{Parameters}
+{\em nazwa\+Pliku} & Nazwa pliku wyjściowego.\\
+\hline
+{\em nazwa\+Pliku} & Nazwa pliku wyjściowego (np. "{}drzewo.\+txt"{}). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_b_s_tree_a705ec49fa3178acccc616314d55a2ed4}\index{BSTree@{BSTree}!znajdzSciezke@{znajdzSciezke}}
+\index{znajdzSciezke@{znajdzSciezke}!BSTree@{BSTree}}
+\doxysubsubsection{\texorpdfstring{znajdzSciezke()}{znajdzSciezke()}}
+{\footnotesize\ttfamily \label{class_b_s_tree_a705ec49fa3178acccc616314d55a2ed4} 
+void BSTree\+::znajdz\+Sciezke (\begin{DoxyParamCaption}\item[{int}]{wartosc}{}\end{DoxyParamCaption})}
+
+
+
+Wyszukuje ścieżkę od korzenia do węzła o podanej wartości. Ścieżka jest drukowana bezpośrednio do konsoli. 
+
+Publiczna metoda szukająca ścieżki od korzenia do węzła. Wyświetla ścieżkę w konsoli.
+
+
+\begin{DoxyParams}{Parameters}
+{\em wartosc} & Wartość, do której szukana jest ścieżka.\\
+\hline
+{\em wartosc} & Wartość węzła, do którego szukamy ścieżki. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_b_s_tree_8h}{BSTree.\+h}}\item 
+\mbox{\hyperlink{_b_s_tree_8cpp}{BSTree.\+cpp}}\end{DoxyCompactItemize}

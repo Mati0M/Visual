@@ -1,0 +1,125 @@
+\doxysection{File\+Manager Class Reference}
+\hypertarget{class_file_manager}{}\label{class_file_manager}\index{FileManager@{FileManager}}
+
+
+Klasa narzędziowa do obsługi operacji plikowych dla drzewa BST.  
+
+
+
+
+{\ttfamily \#include $<$File\+Manager.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_file_manager_a1924f15ac82e6bb10ca037edfe453619}{wczytaj\+Tekstowy\+Do\+Drzewa}} (\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&drzewo, const std\+::string \&nazwa\+Pliku)
+\begin{DoxyCompactList}\small\item\em Wczytuje liczby z pliku tekstowego i dodaje je do drzewa. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_file_manager_a8f3b3b130aee3131527c7e27647ec4b5}{zapisz\+Binarnie}} (\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&drzewo, const std\+::string \&nazwa\+Pliku)
+\begin{DoxyCompactList}\small\item\em Zapisuje całą strukturę drzewa do pliku binarnego. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_b_s_tree}{BSTree}} \mbox{\hyperlink{class_file_manager_a594ca8620a1188df93700be725a8e75c}{wczytaj\+Binarnie}} (const std\+::string \&nazwa\+Pliku)
+\begin{DoxyCompactList}\small\item\em Wczytuje strukturę drzewa z pliku binarnego. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Klasa narzędziowa do obsługi operacji plikowych dla drzewa BST. 
+
+
+\begin{DoxyItemize}
+\item Zapewnia metody do serializacji (zapisu) i deserializacji (odczytu) drzewa do/z formatu tekstowego i binarnego. 
+\end{DoxyItemize}
+
+\label{doc-func-members}
+\Hypertarget{class_file_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_file_manager_a594ca8620a1188df93700be725a8e75c}\index{FileManager@{FileManager}!wczytajBinarnie@{wczytajBinarnie}}
+\index{wczytajBinarnie@{wczytajBinarnie}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{wczytajBinarnie()}{wczytajBinarnie()}}
+{\footnotesize\ttfamily \label{class_file_manager_a594ca8620a1188df93700be725a8e75c} 
+\mbox{\hyperlink{class_b_s_tree}{BSTree}} File\+Manager\+::wczytaj\+Binarnie (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{nazwa\+Pliku}{}\end{DoxyParamCaption})}
+
+
+
+Wczytuje strukturę drzewa z pliku binarnego. 
+
+
+\begin{DoxyItemize}
+\item Tworzy i zwraca {\itshape nowy} obiekt \doxylink{class_b_s_tree}{BSTree}, odtworzony z pliku binarnego.
+\item Zakłada, że plik został zapisany w kolejności Preorder. 
+\begin{DoxyParams}{Parameters}
+{\em nazwa\+Pliku} & Nazwa pliku binarnego do wczytania. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nowy obiekt \doxylink{class_b_s_tree}{BSTree} odtworzony z pliku.
+\end{DoxyReturn}
+Otwiera plik binarny, czyta liczby całkowite jedna po drugiej i buduje {\itshape nowe} drzewo, dodając je w kolejności odczytu. Działa poprawnie tylko wtedy, gdy plik był zapisany w kolejności Preorder. 
+\begin{DoxyParams}{Parameters}
+{\em nazwa\+Pliku} & Nazwa pliku binarnego do wczytania. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Nowy obiekt \doxylink{class_b_s_tree}{BSTree} odtworzony z pliku. Zwraca puste drzewo, jeśli otwarcie pliku się nie powiodło. 
+\end{DoxyReturn}
+
+\end{DoxyItemize}\Hypertarget{class_file_manager_a1924f15ac82e6bb10ca037edfe453619}\index{FileManager@{FileManager}!wczytajTekstowyDoDrzewa@{wczytajTekstowyDoDrzewa}}
+\index{wczytajTekstowyDoDrzewa@{wczytajTekstowyDoDrzewa}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{wczytajTekstowyDoDrzewa()}{wczytajTekstowyDoDrzewa()}}
+{\footnotesize\ttfamily \label{class_file_manager_a1924f15ac82e6bb10ca037edfe453619} 
+void File\+Manager\+::wczytaj\+Tekstowy\+Do\+Drzewa (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&}]{drzewo}{, }\item[{const std\+::string \&}]{nazwa\+Pliku}{}\end{DoxyParamCaption})}
+
+
+
+Wczytuje liczby z pliku tekstowego i dodaje je do drzewa. 
+
+
+\begin{DoxyItemize}
+\item Otwiera plik tekstowy i dodaje każdą znalezioną liczbę do istniejącego obiektu drzewa. 
+\begin{DoxyParams}{Parameters}
+{\em drzewo} & Referencja do obiektu \doxylink{class_b_s_tree}{BSTree}, który ma być zmodyfikowany. \\
+\hline
+{\em nazwa\+Pliku} & Nazwa pliku .txt do wczytania.\\
+\hline
+\end{DoxyParams}
+Otwiera plik o podanej nazwie, czyta liczby całkowite (oddzielone białymi znakami) i dodaje je do istniejącego obiektu drzewa za pomocą metody {\ttfamily drzewo.\+dodaj()}. 
+\begin{DoxyParams}{Parameters}
+{\em drzewo} & Referencja do obiektu \doxylink{class_b_s_tree}{BSTree}, który ma być zmodyfikowany. \\
+\hline
+{\em nazwa\+Pliku} & Nazwa pliku .txt do wczytania. \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}\Hypertarget{class_file_manager_a8f3b3b130aee3131527c7e27647ec4b5}\index{FileManager@{FileManager}!zapiszBinarnie@{zapiszBinarnie}}
+\index{zapiszBinarnie@{zapiszBinarnie}!FileManager@{FileManager}}
+\doxysubsubsection{\texorpdfstring{zapiszBinarnie()}{zapiszBinarnie()}}
+{\footnotesize\ttfamily \label{class_file_manager_a8f3b3b130aee3131527c7e27647ec4b5} 
+void File\+Manager\+::zapisz\+Binarnie (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_b_s_tree}{BSTree}} \&}]{drzewo}{, }\item[{const std\+::string \&}]{nazwa\+Pliku}{}\end{DoxyParamCaption})}
+
+
+
+Zapisuje całą strukturę drzewa do pliku binarnego. 
+
+Publiczna metoda zapisująca drzewo do pliku binarnego.
+
+
+\begin{DoxyItemize}
+\item Wykorzystuje prywatną funkcję pomocniczą do rekurencyjnego zapisu w kolejności Preorder. 
+\begin{DoxyParams}{Parameters}
+{\em drzewo} & Referencja do drzewa, które ma być zapisane. \\
+\hline
+{\em nazwa\+Pliku} & Nazwa pliku wyjściowego (np. "{}drzewo.\+bin"{}).\\
+\hline
+\end{DoxyParams}
+Otwiera plik binarny do zapisu i rozpoczyna rekurencyjny proces zapisu, wywołując {\ttfamily zapisz\+Binarnie\+Helper}. Wymaga przyjaźni z klasą \doxylink{class_b_s_tree}{BSTree}, aby uzyskać dostęp do korzenia. 
+\begin{DoxyParams}{Parameters}
+{\em drzewo} & Referencja do drzewa, które ma być zapisane. \\
+\hline
+{\em nazwa\+Pliku} & Nazwa pliku wyjściowego (np. "{}drzewo.\+bin"{}). \\
+\hline
+\end{DoxyParams}
+
+\end{DoxyItemize}
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_file_manager_8h}{File\+Manager.\+h}}\item 
+\mbox{\hyperlink{_file_manager_8cpp}{File\+Manager.\+cpp}}\end{DoxyCompactItemize}
