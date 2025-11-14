@@ -1,58 +1,63 @@
-// 1. Strażnik (Header Guard)
+/**
+ * @file FileManager.h
+ * @brief Deklaracja (interfejs) klasy FileManager.
+ * @details Klasa ta odpowiada za operacje wejścia/wyjścia,
+ * w tym wczytywanie i zapisywanie drzewa BST do plików.
+ */
+
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
-// 2. Dołączenia bibliotek
-#include <string> // Dla std::string
-
-// 3. Dołączenie pełnej definicji BSTree
-// MUSIMY to zrobić, ponieważ nasza funkcja pomocnicza (poniżej)
-// będzie potrzebowała znać prywatny typ `BSTree::Wezel`.
-// To jest jedna z kluczowych poprawek.
+#include <string>
 #include "BSTree.h" 
-
-// 4. Deklaracja wyprzedzająca dla strumienia
-// (Zamiast dołączać cały <iostream> lub <fstream>)
 #include <iosfwd>
 
-// 5. Deklaracja klasy FileManager
+/**
+ * @class FileManager
+ * @brief Klasa narzędziowa do obsługi operacji plikowych dla drzewa BST.
+ * * Zapewnia metody do serializacji (zapisu) i deserializacji (odczytu)
+ * drzewa do/z formatu tekstowego i binarnego.
+ */
 class FileManager {
 
-// 6. Sekcja prywatna
-// (To była druga kluczowa poprawka - dodanie tej sekcji)
 private:
     /**
      * @brief Prywatny rekurencyjny pomocnik do zapisu binarnego.
-     * Używa kolejności Preorder.
-     * @param wezel Aktualnie przetwarzany węzeł (BSTree::Wezel)
-     * @param plik Strumień pliku binarnego
+     * * Zapisuje drzewo do strumienia w kolejności Preorder, co
+     * gwarantuje odtworzenie tej samej struktury drzewa.
+     * @param wezel Aktualny węzeł w rekurencji (zaczynając od korzenia).
+     * @param plik Strumień wyjściowy (std::ostream) otwarty w trybie binarnym.
      */
     void zapiszBinarnieHelper(BSTree::Wezel* wezel, std::ostream& plik);
 
-// 7. Sekcja publiczna (API klasy)
 public:
     /**
      * @brief Wczytuje liczby z pliku tekstowego i dodaje je do drzewa.
-     * @param drzewo Referencja do drzewa, do którego dodajemy elementy.
-     * @param nazwaPliku Nazwa pliku .txt (np. "liczby.txt").
+     * * Otwiera plik tekstowy i dodaje każdą znalezioną liczbę
+     * do istniejącego obiektu drzewa.
+     * @param drzewo Referencja do obiektu BSTree, który ma być zmodyfikowany.
+     * @param nazwaPliku Nazwa pliku .txt do wczytania.
      */
     void wczytajTekstowyDoDrzewa(BSTree& drzewo, const std::string& nazwaPliku);
 
     /**
      * @brief Zapisuje całą strukturę drzewa do pliku binarnego.
-     * @param drzewo Referencja do drzewa, które chcemy zapisać.
+     * * Wykorzystuje prywatną funkcję pomocniczą do rekurencyjnego
+     * zapisu w kolejności Preorder.
+     * @param drzewo Referencja do drzewa, które ma być zapisane.
      * @param nazwaPliku Nazwa pliku wyjściowego (np. "drzewo.bin").
      */
     void zapiszBinarnie(BSTree& drzewo, const std::string& nazwaPliku);
 
     /**
      * @brief Wczytuje strukturę drzewa z pliku binarnego.
+     * * Tworzy i zwraca *nowy* obiekt BSTree, odtworzony z pliku binarnego.
+     * * Zakłada, że plik został zapisany w kolejności Preorder.
      * @param nazwaPliku Nazwa pliku binarnego do wczytania.
      * @return Nowy obiekt BSTree odtworzony z pliku.
      */
     BSTree wczytajBinarnie(const std::string& nazwaPliku);
 
-}; // Koniec deklaracji klasy FileManager
+};
 
-// 8. Koniec strażnika
 #endif // FILEMANAGER_H

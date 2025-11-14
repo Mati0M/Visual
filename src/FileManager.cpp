@@ -1,24 +1,33 @@
-// 1. Dołączenia
-#include "FileManager.h" // Plik nagłówkowy tej klasy
-#include <fstream>       // Do obsługi strumieni plików (ifstream, ofstream)
-#include <iostream>      // Do obsługi błędów (std::cout)
+/**
+ * @file FileManager.cpp
+ * @brief Implementacja (definicje metod) klasy FileManager.
+ * @details Zawiera logikę wczytywania i zapisywania drzewa BST
+ * do plików tekstowych oraz binarnych.
+ */
 
-// 2. Implementacja: Wczytaj z pliku tekstowego
+#include "FileManager.h"
+#include <fstream>
+#include <iostream>
+
+/**
+ * @brief Wczytuje liczby z pliku tekstowego i dodaje je do drzewa.
+ * @details Otwiera plik o podanej nazwie, czyta liczby całkowite
+ * (oddzielone białymi znakami) i dodaje je do istniejącego
+ * obiektu drzewa za pomocą metody `drzewo.dodaj()`.
+ * @param drzewo Referencja do obiektu BSTree, który ma być zmodyfikowany.
+ * @param nazwaPliku Nazwa pliku .txt do wczytania.
+ */
 void FileManager::wczytajTekstowyDoDrzewa(BSTree& drzewo, const std::string& nazwaPliku) {
     
-    // Otwieramy plik do odczytu
     std::ifstream plikWejsciowy(nazwaPliku);
 
-    // Sprawdzamy, czy plik się otworzył
     if (!plikWejsciowy.is_open()) {
         std::cout << "Blad: Nie mozna otworzyc pliku: " << nazwaPliku << std::endl;
-        return; // Zakończ funkcję, jeśli się nie udało
+        return;
     }
 
     int liczba;
-    // Wczytujemy liczby jedna po drugiej, dopóki plik się nie skończy
     while (plikWejsciowy >> liczba) {
-        // Używamy publicznej metody drzewa, aby dodać element
         drzewo.dodaj(liczba); 
     }
 
@@ -27,10 +36,16 @@ void FileManager::wczytajTekstowyDoDrzewa(BSTree& drzewo, const std::string& naz
 }
 
 
-// 3. Implementacja: Zapisz binarnie (funkcja publiczna - "opakowanie")
+/**
+ * @brief Publiczna metoda zapisująca drzewo do pliku binarnego.
+ * @details Otwiera plik binarny do zapisu i rozpoczyna
+ * rekurencyjny proces zapisu, wywołując `zapiszBinarnieHelper`.
+ * Wymaga przyjaźni z klasą BSTree, aby uzyskać dostęp do korzenia.
+ * @param drzewo Referencja do drzewa, które ma być zapisane.
+ * @param nazwaPliku Nazwa pliku wyjściowego (np. "drzewo.bin").
+ */
 void FileManager::zapiszBinarnie(BSTree& drzewo, const std::string& nazwaPliku) {
     
-    // Otwieramy plik do zapisu w trybie binarnym
     std::ofstream plikWyjsciowy(nazwaPliku, std::ios::binary);
 
     if (!plikWyjsciowy.is_open()) {
@@ -38,9 +53,6 @@ void FileManager::zapiszBinarnie(BSTree& drzewo, const std::string& nazwaPliku) 
         return;
     }
 
-    // Wywołujemy prywatnego pomocnika, zaczynając od korzenia.
-    // Mamy dostęp do 'drzewo.korzen', ponieważ BSTree
-    // zadeklarowała 'friend class FileManager;'.
     zapiszBinarnieHelper(drzewo.korzen, plikWyjsciowy);   
 
     plikWyjsciowy.close();
@@ -48,58 +60,54 @@ void FileManager::zapiszBinarnie(BSTree& drzewo, const std::string& nazwaPliku) 
 }
 
 
-// 4. Implementacja: Prywatny pomocnik zapisu binarnego (rekurencja)
-// (Kompilator wie, że ta funkcja istnieje, bo zadeklarowaliśmy ją w .h)
+/**
+ * @brief Prywatny rekurencyjny pomocnik do zapisu binarnego.
+ * @details Zapisuje drzewo do strumienia binarnego w kolejności Preorder
+ * (Korzeń, Lewy, Prawy). Taka kolejność gwarantuje, że
+ * drzewo można odtworzyć do identycznej struktury poprzez proste dodawanie.
+ * @param wezel Aktualny węzeł w rekurencji (zaczynając od korzenia).
+ * @param plik Strumień wyjściowy (std::ostream) otwarty w trybie binarnym.
+ */
 void FileManager::zapiszBinarnieHelper(BSTree::Wezel* wezel, std::ostream& plik) {
     
-    // Przypadek bazowy rekurencji: doszliśmy do liścia
     if (wezel == nullptr) {
         return;
     }
 
-    // Zapisujemy w kolejności Preorder (Korzeń -> Lewy -> Prawy)
-    // 1. Zapisz dane obecnego węzła (Korzeń)
     plik.write( (char*)&(wezel->dane), sizeof(int) );
-    
-    // 2. Rekurencyjnie zapisz lewe poddrzewo
     zapiszBinarnieHelper(wezel->lewy, plik);
-    
-    // 3. Rekurencyjnie zapisz prawe poddrzewo
     zapiszBinarnieHelper(wezel->prawy, plik);
 }
 
 
-// 5. Implementacja: Wczytaj z pliku binarnego
+/**
+ * @brief Wczytuje strukturę drzewa z pliku binarnego.
+ * @details Otwiera plik binarny, czyta liczby całkowite jedna po drugiej
+ * i buduje *nowe* drzewo, dodając je w kolejności odczytu.
+ * Działa poprawnie tylko wtedy, gdy plik był zapisany w kolejności Preorder.
+ * @param nazwaPliku Nazwa pliku binarnego do wczytania.
+ * @return Nowy obiekt BSTree odtworzony z pliku. Zwraca puste
+ * drzewo, jeśli otwarcie pliku się nie powiodło.
+ */
 BSTree FileManager::wczytajBinarnie(const std::string& nazwaPliku) {
     
-    // Tworzymy nowe, puste drzewo, które będziemy budować
     BSTree noweDrzewo;
 
-    // Otwieramy plik binarny do odczytu
     std::ifstream plikWejsciowy(nazwaPliku, std::ios::binary);
 
     if (!plikWejsciowy.is_open()) {
         std::cout << "Blad: Nie mozna otworzyc pliku binarnego: " << nazwaPliku << std::endl;
-        return noweDrzewo; // Zwróć puste drzewo, jeśli się nie udało
+        return noweDrzewo;
     }
 
     int liczba;
     
-    // (To jest trzecia, kluczowa poprawka - literówka)
-    // Czytamy z 'plikWejsciowy', a nie 'plik'
-    //
-    // Pętla czyta z pliku porcje o wielkości 'sizeof(int)',
-    // dopóki plik się nie skończy.
     while ( plikWejsciowy.read( (char*)&liczba, sizeof(int)) ) {
-        // Ponieważ plik był zapisany w Preorder, proste dodawanie
-        // elementów do nowego drzewa odtworzy DOKŁADNIE
-        // tę samą strukturę, jaka była zapisywana.
         noweDrzewo.dodaj(liczba);
     }
 
     plikWejsciowy.close();
     std::cout << "Wczytano drzewo z pliku binarnego " << nazwaPliku << "." << std::endl;
     
-    // Zwracamy gotowe, odbudowane drzewo
     return noweDrzewo;
 }
