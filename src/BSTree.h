@@ -48,7 +48,8 @@ private:
          */
         Wezel(int wartosc) {
             dane = wartosc;
-            lewy = nullptr
+            lewy = nullptr;
+            prawy = nullptr;
         }
     };
 
